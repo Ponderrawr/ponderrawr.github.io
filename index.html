@@ -1,17 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Welcome to My Site</title>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>W. Chayne Bowmer | Electrical Engineering</title>
+<meta name="description" content="W. Chayne Bowmer: Electrical Engineering student at Penn State Harrisburg focused on analog design, power electronics and hardware test. Former USAF NDT technician.">
+<style>
+  :root{
+    --bg:#0b1210; --panel:#111c19; --line:#1f3a33; --text:#d9e6e1; --muted:#8fa69e;
+    --accent:#3ddc97; --copper:#d9a35b; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.6}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(11,18,16,.85);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+  nav .logo{font-weight:700;letter-spacing:.5px;color:var(--text)}
+  nav .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:.92rem}
+  nav ul a{color:var(--muted)} nav ul a:hover{color:var(--text);text-decoration:none}
+
+  /* hero with PCB-trace background */
+  header{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  header svg.traces{position:absolute;inset:0;width:100%;height:100%;opacity:.35}
+  .hero{position:relative;padding:96px 0 84px}
+  .tag{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:.8rem;color:var(--copper);
+       border:1px solid var(--copper);border-radius:999px;padding:3px 12px;margin-bottom:18px}
+  h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;margin-bottom:14px}
+  h1 span{color:var(--accent)}
+  .lead{font-size:1.15rem;color:var(--muted);max-width:640px;margin-bottom:28px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:10px 18px;border-radius:10px;border:1px solid var(--accent);font-weight:600;font-size:.95rem}
+  .btn.solid{background:var(--accent);color:#06221a} .btn:hover{text-decoration:none;filter:brightness(1.1)}
+
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.6rem;margin-bottom:8px}
+  h2::before{content:"// ";color:var(--accent);font-family:ui-monospace,Consolas,monospace}
+  .sub{color:var(--muted);margin-bottom:32px}
+
+  /* about stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:28px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .stat b{display:block;font-size:1.6rem;color:var(--accent)}
+  .stat small{color:var(--muted)}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+        display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+  .card:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .card h3{font-size:1.15rem;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.95rem;flex:1}
+  .card ul{color:var(--muted);font-size:.92rem;margin:10px 0 0 18px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+  .chip{font-family:ui-monospace,Consolas,monospace;font-size:.75rem;color:var(--copper);
+        background:rgba(217,163,91,.08);border:1px solid rgba(217,163,91,.35);border-radius:6px;padding:2px 8px}
+  .card .link{font-weight:600;margin-top:6px}
+  .feature{grid-column:1/-1}
+  .feature .cols{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+  @media(max-width:720px){.feature .cols{grid-template-columns:1fr} nav ul{display:none}}
+
+  /* timeline */
+  .tl{border-left:2px solid var(--line);margin-left:6px}
+  .job{position:relative;padding:0 0 34px 26px}
+  .job::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;
+               background:var(--bg);border:2px solid var(--accent)}
+  .job h3{font-size:1.1rem}
+  .job .meta{color:var(--copper);font-family:ui-monospace,Consolas,monospace;font-size:.82rem;margin:2px 0 8px}
+  .job ul{color:var(--muted);margin-left:18px;font-size:.95rem}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .skills div{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .skills h4{color:var(--accent);font-size:.9rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .skills p{color:var(--muted);font-size:.93rem}
+
+  footer{padding:56px 0;text-align:center}
+  footer .btns{justify-content:center;margin:18px 0}
+  footer small{color:var(--muted)}
+</style>
 </head>
 <body>
-  <h1>Hello, I'm W. Chayne Bowmer 👋</h1>
-  <p>IEEE Executive Assistant | Hardware + Electronics Designer</p>
-  <p>I have 12 years of USAF and ANG experience working in maintenance and nondestructive testing.
-  <p>Check out some of my projects below:</p>
+
+<nav><div class="wrap">
+  <a class="logo" href="#">W. Chayne <span>Bowmer</span></a>
   <ul>
-    <li><a href="https://github.com/Ponderrawr/PSH_IEEE_Neopixel_Workshop">IEEE Neopixel Workshop</a></li>
-    <li><a href="https://github.com/Ponderrawr/PSH_IEEE_Christmas_Soldering_Workshop">IEEE Christmas Soldering Workshop</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
+</div></nav>
+
+<header>
+  <svg class="traces" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#3ddc97" stroke-width="2">
+      <path d="M0 80 H220 L260 120 H520 L560 80 H1000"/>
+      <path d="M0 300 H140 L190 250 H420 L470 300 H760 L800 340 H1000"/>
+      <path d="M620 0 V60 L660 100 V200 L700 240 H1000" stroke="#d9a35b"/>
+      <path d="M90 400 V330 L130 290 V180 L170 140 H300" stroke="#d9a35b"/>
+    </g>
+    <g fill="#3ddc97"><circle cx="220" cy="80" r="5"/><circle cx="520" cy="120" r="5"/><circle cx="420" cy="250" r="5"/>
+      <circle cx="760" cy="300" r="5"/><circle cx="700" cy="240" r="5"/><circle cx="300" cy="140" r="5"/></g>
+  </svg>
+  <div class="wrap hero">
+    <div class="tag">EE student · Penn State Harrisburg</div>
+    <h1>Hi, I'm Chayne.<br>I build <span>hardware</span> that works.</h1>
+    <p class="lead">Electrical engineering student focused on analog circuits, power electronics and hardware test,
+      with 12 years in USAF and Air National Guard aircraft maintenance and nondestructive inspection before that.</p>
+    <div class="btns">
+      <a class="btn solid" href="#projects">See projects</a>
+      <a class="btn" href="https://www.linkedin.com/in/wchaynebowmer">LinkedIn</a>
+      <a class="btn" href="https://github.com/Ponderrawr">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="about"><div class="wrap">
+  <h2>About</h2>
+  <p class="sub">Derive it. Build it. Measure it. Find out why it's wrong.</p>
+  <p>I like knowing <em>why</em> a circuit works, not just that it does. I'd rather derive the
+    equations than copy a reference design. Then I build it, put it on the scope, and chase every
+    place the hardware disagrees with the math. That gap is usually where I learn the most.</p>
+  <p style="margin-top:14px">Before engineering, I spent 12 years in the Air Force and Air National
+    Guard as an F-16 crew chief and NDT inspector, finding cracks nobody else could see on aircraft in
+    Arizona, South Korea, Japan, California and Pennsylvania. The habits stuck: don't accept the first
+    answer, trust the measurement over the assumption, and write the procedure so someone else can
+    repeat it.</p>
+  <p style="margin-top:14px">Right now I'm going deep on analog design and power electronics. I do my
+    best work when I'm handed an unsolved problem, a bench, and room to figure it out.</p>
+  <div class="stats">
+    <div class="stat"><b>3.95</b><small>GPA, B.S. Electrical Engineering</small></div>
+    <div class="stat"><b>12 yrs</b><small>USAF / ANG, F-16 & C-130, NDT</small></div>
+    <div class="stat"><b>Microchip</b><small>Engineering intern, oscillator test</small></div>
+    <div class="stat"><b>IEEE</b><small>Student Branch Executive Assistant</small></div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Projects</h2>
+  <p class="sub">Designed, built, debugged and documented.</p>
+  <div class="grid">
+
+    <div class="card feature">
+      <div class="cols">
+        <div>
+          <h3>Christmas Ornament PCB</h3>
+          <p>A solderable LED ornament I designed for an IEEE holiday soldering event. One 80&nbsp;mm board supports two
+            LED layouts (a wreath ring and a Bohr-model atom), so students choose a theme and screw on a matching 3D-printed
+            front plate.</p>
+          <div class="chips"><span class="chip">Altium</span><span class="chip">ATtiny85</span><span class="chip">AVR C</span>
+            <span class="chip">Charlieplexing</span><span class="chip">Low power</span><span class="chip">Python CAD</span></div>
+          <a class="link" href="https://github.com/Ponderrawr/PSH_IEEE_Christmas_Soldering_Workshop">View repository →</a>
+        </div>
+        <ul>
+          <li>Drives 6 LEDs per layout from only 3 MCU pins with software PWM</li>
+          <li>4 modes on one button (fade, shimmer, all-on, sleep at ~0.1&nbsp;µA)</li>
+          <li>Wrote a Python generator that turns PCB coordinates into a printable, light-tuned front plate (STL)</li>
+          <li>Full bring-up log: programmer drivers, clock timing and button-wiring bugs, each with root cause and fix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>IEEE NeoPixel Workshop</h3>
+      <p>Hands-on workshop teaching students to wire and program addressable RGB LEDs, from first blink to animated patterns.</p>
+      <div class="chips"><span class="chip">Arduino</span><span class="chip">WS2812</span><span class="chip">Teaching</span></div>
+      <a class="link" href="https://github.com/Ponderrawr/PSH_IEEE_Neopixel_Workshop">View repository →</a>
+    </div>
+
+    <div class="card">
+      <h3>Oscillator Test Fixtures <small style="color:var(--muted)">(Microchip)</small></h3>
+      <p>Built a parasitic-board library from VNA measurements and designed a G-sense and shock-test fixture for crystal
+        oscillators in Xpedition.</p>
+      <div class="chips"><span class="chip">VNA</span><span class="chip">Xpedition</span><span class="chip">Test procedures</span></div>
+    </div>
+
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <h2>Experience</h2>
+  <p class="sub">Engineering, inspection and leadership.</p>
+  <div class="tl">
+    <div class="job">
+      <h3>Engineering Intern, Microchip Technology</h3>
+      <div class="meta">May 2026 – Aug 2026 · Mt Holly Springs, PA</div>
+      <ul>
+        <li>Designed and built a parasitic board library for oscillator test fixtures using VNA measurements and Excel analysis</li>
+        <li>Designed an engineering fixture for G-sense and shock testing of oscillators in Xpedition</li>
+        <li>Created standardized test procedures for engineering test fixture qualification</li>
+        <li>Tested hybrid crystal oscillators and compiled characterization data across EMXO/OCXO/TCXO/VCXO/XO products</li>
+        <li>Soldered prototype circuits and customer units for testing</li>
+      </ul>
+    </div>
+    <div class="job">
+      <h3>NDT Technician / Aircraft Mechanic (C-130 / F-16)</h3>
+      <div class="meta">2013 – 2025 · USAF & Pennsylvania Air National Guard</div>
+      <ul>
+        <li>Led technical inspections, developed training plans and briefed results to leadership</li>
+        <li>Managed capital equipment upgrades and process improvements: 100% QA pass rate across 10+ programs</li>
+        <li>Government Purchase Card holder managing more than $100K in procurement</li>
+        <li>Held a US Secret clearance</li>
+      </ul>
+    </div>
+    <div class="job">
+      <h3>NDT Technician, MQC Labs</h3>
+      <div class="meta">2020 – 2021 · Aberdeen, MD</div>
+      <ul>
+        <li>Inspections to NAS / ASTM / ASME / AWS standards: PT, MT, RT and ground-penetrating radar</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Skills</h2>
+  <p class="sub">Tools I use on the bench and at the desk.</p>
+  <div class="skills">
+    <div><h4>Design</h4><p>Analog & digital circuit design, PCB layout, Altium Designer, Xpedition, KiCad, LTspice, PSpice</p></div>
+    <div><h4>Test & measurement</h4><p>Oscilloscope, VNA, bench instruments, test procedure writing, characterization data</p></div>
+    <div><h4>Embedded</h4><p>AVR (bare-metal C), ESP32, Arduino, PlatformIO, ISP programming</p></div>
+    <div><h4>Other</h4><p>SolidWorks, Python, Lean Six Sigma Yellow Belt, technical documentation, team leadership</p></div>
+  </div>
+  <p class="sub" style="margin:28px 0 0"><b style="color:var(--text)">Coursework:</b> Circuit Analysis, Digital Systems,
+    Signals & Systems, Electronics Design I & II, Power Electronics, Microcontrollers, Semiconductor Device Principles</p>
+</div></section>
+
+<footer id="contact"><div class="wrap">
+  <h2 style="display:inline-block">Let's talk</h2>
+  <p class="sub" style="margin:8px 0 0">Open to internships and entry-level roles in hardware, power and test engineering.</p>
+  <div class="btns">
+    <a class="btn solid" href="mailto:chaynebowmer@live.com">Email me</a>
+    <a class="btn" href="https://www.linkedin.com/in/wchaynebowmer">LinkedIn</a>
+    <a class="btn" href="https://github.com/Ponderrawr">GitHub</a>
+  </div>
+  <small>© 2026 W. Chayne Bowmer</small>
+</div></footer>
+
 </body>
 </html>
